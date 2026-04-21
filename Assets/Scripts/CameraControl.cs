@@ -1,10 +1,11 @@
-using System;
+
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraControl : MonoBehaviour
 {
+    [SerializeField] private Transform player; 
     [SerializeField] private float zoomSpeed = 2f;
     [SerializeField] private float zoomLerpSpeed = 10f;
     [SerializeField] private float minDistance = 3f;
@@ -18,7 +19,10 @@ public class CameraControl : MonoBehaviour
     private float TargetZoom;
     private float CurrentZoom;
 
-   
+    private Vector3 offset;
+    private float currentDistance;
+
+
 
     void Start()
     {
@@ -26,10 +30,18 @@ public class CameraControl : MonoBehaviour
       controls.Enable();
       controls.CameraControls.MouseZoom.performed += HandleMouseScroll;
         
-     Cursor.lockState = CursorLockMode.Locked;
-     cam = GetComponent<CinemachineCamera>();
-     orbit = cam.GetComponent<CinemachineOrbitalFollow>();
-     TargetZoom = CurrentZoom = orbit.Radius;
+        Cursor.lockState = CursorLockMode.Locked;
+        //cam = GetComponent<CinemachineCamera>();
+        //orbit = cam.GetComponent<CinemachineOrbitalFollow>();
+        //TargetZoom = CurrentZoom = orbit.Radius;
+
+        if (player != null)
+        {
+            offset = transform.position - player.position;
+            offset.x = 0f;                    
+            currentDistance = -offset.z;
+        }
+
     }
 
     private void HandleMouseScroll(InputAction.CallbackContext context)
@@ -40,18 +52,29 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-     
-        if (scrollDelta.y != 0)
-        {
-            if (orbit != null)
-            {
-              TargetZoom = Mathf.Clamp(orbit.Radius - scrollDelta.y *zoomSpeed , minDistance, maxDistance);
-                scrollDelta = Vector2.zero;
-            }
-        }
+        if (player == null) return;
 
-        CurrentZoom = Mathf.Lerp(CurrentZoom, TargetZoom, Time.deltaTime * zoomLerpSpeed);
-        orbit.Radius = CurrentZoom;
+        /*
+         if (scrollDelta.y != 0)
+         {
+             if (orbit != null)
+             {
+               TargetZoom = Mathf.Clamp(orbit.Radius - scrollDelta.y *zoomSpeed , minDistance, maxDistance);
+                 scrollDelta = Vector2.zero;
+             }
+         }
+
+         CurrentZoom = Mathf.Lerp(CurrentZoom, TargetZoom, Time.deltaTime * zoomLerpSpeed);
+         orbit.Radius = CurrentZoom;
+        */
+        offset.z = -currentDistance;
+
+        Vector3 targetPos = player.position + offset;
+        targetPos.x = 0f;
+
+        transform.position = targetPos;
+        // Camera lock to player
+        transform.LookAt(player.position + Vector3.up * 1.5f);
     }
 
 
