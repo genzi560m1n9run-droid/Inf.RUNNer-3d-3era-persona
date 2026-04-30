@@ -58,14 +58,14 @@ public class PlayerGoverner : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation( moveDirection , Vector3.up );
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation,10 * Time.deltaTime);
         }
-        */
+       
         if (shouldFaceMoveDirection && moveInput.sqrMagnitude > 0.001f)
         {
             Vector3 moveDirection = forwardMove + horizontalMove;   
             Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10 * Time.deltaTime);
         }
-
+        */
         velocity.y += gravity * Time.deltaTime;
         governer.Move(velocity * Time.deltaTime);
     }
