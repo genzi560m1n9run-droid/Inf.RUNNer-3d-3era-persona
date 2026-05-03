@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class SectionAPPARATE : MonoBehaviour
 {
-    [SerializeField] int ApparitionDistance;
-    public GameObject Stage;
+    public GameObject TilePod;
+    Vector3 NextPodSpawn;
 
-    private void OnTriggerEnter(Collider other)
+    void SpawnTile()
     {
-        if (other.gameObject.CompareTag("APPARATE") )
+        GameObject temp = Instantiate(TilePod, NextPodSpawn , Quaternion.identity);
+        NextPodSpawn = temp.transform.GetChild(1).transform.position;
+    }
+    private void Start()
+    {
+        for (int i = 0; i < 15; i++)
         {
-            Instantiate(Stage ,new Vector3( 0, 0 ,ApparitionDistance), Quaternion.identity);
-
+            SpawnTile();
         }
     }
 }
