@@ -5,7 +5,7 @@ public class SectionAPPARATE : MonoBehaviour
     public GameObject TilePod;
     Vector3 NextPodSpawn;
 
-    void SpawnTile()
+    public void SpawnTile()
     {
         GameObject temp = Instantiate(TilePod, NextPodSpawn , Quaternion.identity);
         NextPodSpawn = temp.transform.GetChild(1).transform.position;
