@@ -6,18 +6,18 @@ using UnityEngine.InputSystem;
 public class CameraControl : MonoBehaviour
 {
     [SerializeField] private Transform player; 
-    [SerializeField] private float zoomSpeed = 2f;
-    [SerializeField] private float zoomLerpSpeed = 10f;
-    [SerializeField] private float minDistance = 3f;
-    [SerializeField] private float maxDistance = 15f;
+    //[SerializeField] private float zoomSpeed = 2f;
+    //[SerializeField] private float zoomLerpSpeed = 10f;
+    //[SerializeField] private float minDistance = 3f;
+    //[SerializeField] private float maxDistance = 15f;
 
     private Playercontrols controls;
     private CinemachineCamera cam;
     private CinemachineOrbitalFollow orbit;
     private Vector2 scrollDelta;
 
-    private float TargetZoom;
-    private float CurrentZoom;
+    //private float TargetZoom;
+    //private float CurrentZoom;
 
     private Vector3 offset;
     private float currentDistance;

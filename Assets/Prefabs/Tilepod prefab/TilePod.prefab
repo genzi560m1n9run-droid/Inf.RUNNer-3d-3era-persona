@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a33e8fa45721d44592253c0589fb0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollEngine
+  Obstaca: {fileID: 6690624562463362244, guid: 5011a4fd2e98ed94283c9d5ca180c5a8, type: 3}
 --- !u!1 &6812021580001490702
 GameObject:
   m_ObjectHideFlags: 0

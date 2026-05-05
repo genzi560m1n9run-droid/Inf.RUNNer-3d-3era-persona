@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 public class PlayerGoverner : MonoBehaviour
 {
     //[SerializeField] private Transform cameraTransform;
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 100f;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.8f;
-    [SerializeField] private bool shouldFaceMoveDirection=false;
+    //[SerializeField] private bool shouldFaceMoveDirection=false;
     [SerializeField] private float horizontalMultiplier = 2f;
 
     private CharacterController governer;
@@ -20,7 +20,7 @@ public class PlayerGoverner : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        Debug.Log($"Move Input:{moveInput} ");
+       
     }
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -33,7 +33,14 @@ public class PlayerGoverner : MonoBehaviour
     }
 
     void Update()
-    {  /*
+    {
+        float testSpeed = 20f; // fuerza bruta para probar
+
+        Vector3 forwardMove = Vector3.forward * testSpeed * Time.deltaTime;
+
+        // Ignora rotación del jugador para probar
+        governer.Move(forwardMove + new Vector3(moveInput.x * 8f * Time.deltaTime, 0, 0));
+        /*
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
@@ -45,9 +52,10 @@ public class PlayerGoverner : MonoBehaviour
 
         Vector3 moveDirection = forward * moveInput.y + right * moveInput.x;
         governer.Move(moveDirection*speed*Time.deltaTime);
-        */ 
+        */
 
-        Vector3 forwardMove = transform.forward * speed * Time.deltaTime;                    
+
+        //Vector3 forwardMove = transform.forward * speed * Time.deltaTime;                    
         Vector3 horizontalMove = transform.right * moveInput.x * speed * Time.deltaTime * horizontalMultiplier;  
 
         governer.Move(forwardMove + horizontalMove);
