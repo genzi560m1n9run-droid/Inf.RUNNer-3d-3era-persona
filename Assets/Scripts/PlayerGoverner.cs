@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerGoverner : MonoBehaviour
 {
     //[SerializeField] private Transform cameraTransform;
@@ -8,6 +9,7 @@ public class PlayerGoverner : MonoBehaviour
     [SerializeField] private float gravity = -9.8f;
     //[SerializeField] private bool shouldFaceMoveDirection=false;
     [SerializeField] private float horizontalMultiplier = 2f;
+    bool aLive = true; 
 
     private CharacterController governer;
     private Vector3 moveInput;
@@ -19,11 +21,13 @@ public class PlayerGoverner : MonoBehaviour
     }
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!aLive) return;
         moveInput = context.ReadValue<Vector2>();
        
     }
     public void OnJump(InputAction.CallbackContext context)
-    {
+    {   
+         if (!aLive) return;
         Debug.Log($"Jumping{context.performed} - Is Grounded :{governer.isGrounded} ");
         if (context.performed && governer.isGrounded)
         {
@@ -32,9 +36,10 @@ public class PlayerGoverner : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        float testSpeed = 20f; // fuerza bruta para probar
+    private void Update()
+    {   
+        if (!aLive) return;
+        float testSpeed = 15f; // fuerza bruta para probar
 
         Vector3 forwardMove = Vector3.forward * testSpeed * Time.deltaTime;
 
@@ -58,7 +63,7 @@ public class PlayerGoverner : MonoBehaviour
         //Vector3 forwardMove = transform.forward * speed * Time.deltaTime;                    
         Vector3 horizontalMove = transform.right * moveInput.x * speed * Time.deltaTime * horizontalMultiplier;  
 
-        governer.Move(forwardMove + horizontalMove);
+        //governer.Move(forwardMove + horizontalMove);
 
         /*
         if (shouldFaceMoveDirection && moveDirection.sqrMagnitude> 0.001f)
@@ -76,8 +81,15 @@ public class PlayerGoverner : MonoBehaviour
         */
         velocity.y += gravity * Time.deltaTime;
         governer.Move(velocity * Time.deltaTime);
+        if(transform.position.y <-2)
+        {
+            Died();
+        }
     }
-
-
-
+    public void Died()
+    {
+        aLive = false;
+        //restart 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

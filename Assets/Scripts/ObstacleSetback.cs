@@ -5,12 +5,17 @@ public class ObstacleSetback : MonoBehaviour
     PlayerGoverner PlayerMovin;
     void Start()
     {
+        PlayerMovin = GameObject.FindFirstObjectByType<PlayerGoverner>();
+
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player")) 
+        {
+            PlayerMovin.Died();
+
+        }
     }
 }
