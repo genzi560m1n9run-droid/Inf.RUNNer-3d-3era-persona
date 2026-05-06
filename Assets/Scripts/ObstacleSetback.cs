@@ -10,12 +10,17 @@ public class ObstacleSetback : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player")) 
+         if (other.gameObject.CompareTag("Player")) 
         {
-            PlayerMovin.Died();
+            if (PlayerMovin != null)
+            {
+             PlayerMovin.Died();
+            }
+            
 
         }
     }
+      
 }

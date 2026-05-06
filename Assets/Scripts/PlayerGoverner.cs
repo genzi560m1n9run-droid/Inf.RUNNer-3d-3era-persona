@@ -37,14 +37,26 @@ public class PlayerGoverner : MonoBehaviour
     }
 
     private void Update()
-    {   
+    {
         if (!aLive) return;
-        float testSpeed = 15f; // fuerza bruta para probar
 
-        Vector3 forwardMove = Vector3.forward * testSpeed * Time.deltaTime;
+        Vector3 move = Vector3.forward * 15f;
+        move += transform.right * moveInput.x * speed * horizontalMultiplier;
+        move += velocity;
 
-        // Ignora rotación del jugador para probar
-        governer.Move(forwardMove + new Vector3(moveInput.x * 8f * Time.deltaTime, 0, 0));
+        governer.Move(move * Time.deltaTime);
+
+        velocity.y += gravity * Time.deltaTime;
+
+        if (governer.isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+
+        if (transform.position.y < -2)
+        {
+            Died();
+        }
         /*
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
@@ -61,7 +73,7 @@ public class PlayerGoverner : MonoBehaviour
 
 
         //Vector3 forwardMove = transform.forward * speed * Time.deltaTime;                    
-        Vector3 horizontalMove = transform.right * moveInput.x * speed * Time.deltaTime * horizontalMultiplier;  
+        //Vector3 horizontalMove = transform.right * moveInput.x * speed * Time.deltaTime * horizontalMultiplier;  
 
         //governer.Move(forwardMove + horizontalMove);
 
@@ -78,13 +90,11 @@ public class PlayerGoverner : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10 * Time.deltaTime);
         }
-        */
+        
         velocity.y += gravity * Time.deltaTime;
         governer.Move(velocity * Time.deltaTime);
-        if(transform.position.y <-2)
-        {
-            Died();
-        }
+        */
+
     }
     public void Died()
     {
