@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollEngine
   Obstaca: {fileID: 6690624562463362244, guid: 5011a4fd2e98ed94283c9d5ca180c5a8, type: 3}
+  Chapita: {fileID: 1653868133948262685, guid: 78d5d0a81283dc04887b760f2a60f164, type: 3}
 --- !u!1 &6812021580001490702
 GameObject:
   m_ObjectHideFlags: 0

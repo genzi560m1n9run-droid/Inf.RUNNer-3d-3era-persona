@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float turnSpeed = 90f;
+
+    private void OnTriggerEnter(Collider other)
+    {   //Check 
+        if (other.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+        //Add
+
+        //Yeet
+        Destroy(gameObject);
+    }
     void Start()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        transform.Rotate(0,0 , turnSpeed *  Time.deltaTime);
     }
 }
