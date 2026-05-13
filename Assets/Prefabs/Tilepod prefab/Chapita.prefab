@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5195128151160419595}
   - component: {fileID: 1476263173009078399}
   - component: {fileID: 1734989880512325213}
+  - component: {fileID: 2153139563734381462}
   m_Layer: 0
   m_Name: Chapita
   m_TagString: Untagged
@@ -127,4 +128,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b625ddfb9d41642a0113fb4978651e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
-  turnSpeed: 90
+  turnSpeed: 180
+--- !u!54 &2153139563734381462
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653868133948262685}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

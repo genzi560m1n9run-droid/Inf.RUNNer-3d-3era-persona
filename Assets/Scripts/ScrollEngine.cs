@@ -8,6 +8,7 @@ public class ScrollEngine : MonoBehaviour
     {
         ApparaTor = GameObject.FindFirstObjectByType<SectionAPPARATE>();
         SpawnObstacle();
+        SpawnCoins();
     }
 
     private void OnTriggerExit(Collider other)

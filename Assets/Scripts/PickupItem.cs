@@ -5,15 +5,21 @@ public class PickupItem : MonoBehaviour
     public float turnSpeed = 90f;
 
     private void OnTriggerEnter(Collider other)
-    {   //Check 
-        if (other.gameObject.CompareTag("Player"))
+    {  
+        if (other.gameObject.GetComponent<ObstacleSetback>() != null)
         {
+            Destroy(gameObject);
             return;
+        }
+        //Check 
+        if (other.CompareTag("Player"))
+        { 
+            GameManager.inst.Plus1Score();
+            Destroy(gameObject);
         }
         //Add
 
-        //Yeet
-        Destroy(gameObject);
+       
     }
     void Start()
     {

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ObstacleSetback : MonoBehaviour
 {
+
     PlayerGoverner PlayerMovin;
     void Start()
     {
@@ -19,8 +20,7 @@ public class ObstacleSetback : MonoBehaviour
              PlayerMovin.Died();
             }
             
-
-        }
+         }
     }
       
 }
